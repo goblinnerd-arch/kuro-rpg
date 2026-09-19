@@ -1,0 +1,165 @@
+<div class="kuro-sheet-shell">
+  <header class="kuro-header">
+    <div class="kuro-portrait-block">
+      <img class="kuro-portrait" src="{{actor.img}}" data-kuro-edit-image alt="{{actor.name}}">
+    </div>
+
+    <div class="kuro-identity">
+      <div class="kuro-title-row">
+        <input class="kuro-name" type="text" name="name" value="{{actor.name}}" {{#unless editable}}disabled{{/unless}}>
+        <div class="kuro-wordmark">KURO</div>
+      </div>
+      <div class="kuro-identity-grid">
+        <label>Idade <input type="number" name="system.details.age" value="{{system.details.age}}" min="0"></label>
+        <label>Sexo <input type="text" name="system.details.sex" value="{{system.details.sex}}"></label>
+        <label>Profissão <input type="text" name="system.details.profession" value="{{system.details.profession}}"></label>
+        <label>Kaiso <input type="number" name="system.details.kaiso" value="{{system.details.kaiso}}" min="0" max="6"></label>
+        <label>Tamanho <input type="text" name="system.details.size" value="{{system.details.size}}"></label>
+        <label>Peso <input type="text" name="system.details.weight" value="{{system.details.weight}}"></label>
+        <label>Olhos <input type="text" name="system.details.eyes" value="{{system.details.eyes}}"></label>
+        <label>Cabelo <input type="text" name="system.details.hair" value="{{system.details.hair}}"></label>
+      </div>
+    </div>
+  </header>
+
+  <nav class="kuro-tabs">
+    <button type="button" data-kuro-tab="summary">Resumo</button>
+    <button type="button" data-kuro-tab="skills">Habilidades</button>
+    <button type="button" data-kuro-tab="inventory">Inventário</button>
+    <button type="button" data-kuro-tab="notes">Notas</button>
+  </nav>
+
+  <main class="kuro-content">
+    <section data-kuro-panel="summary">
+      <div class="kuro-summary-grid">
+        <section class="kuro-panel">
+          <h2>Características</h2>
+          <div class="kuro-attribute-columns">
+            <div>
+              <h3>Físicas</h3>
+              {{#each physicalAttributes}}
+              <div class="kuro-attribute-row">
+                <button type="button" class="kuro-roll-button" data-roll-attribute="{{this.key}}" title="Rolar {{this.label}}"><i class="fa-solid fa-dice-d6"></i></button>
+                <span class="label">{{this.label}} <small>{{this.abbr}}</small></span>
+                <input type="number" name="system.attributes.{{this.key}}" value="{{this.value}}" min="0" step="1">
+              </div>
+              {{/each}}
+            </div>
+            <div>
+              <h3>Mentais</h3>
+              {{#each mentalAttributes}}
+              <div class="kuro-attribute-row">
+                <button type="button" class="kuro-roll-button" data-roll-attribute="{{this.key}}" title="Rolar {{this.label}}"><i class="fa-solid fa-dice-d6"></i></button>
+                <span class="label">{{this.label}} <small>{{this.abbr}}</small></span>
+                <input type="number" name="system.attributes.{{this.key}}" value="{{this.value}}" min="0" step="1">
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </section>
+
+        <section class="kuro-panel kuro-vitals">
+          <h2>Condição</h2>
+          <div class="kuro-health-head">
+            <span>Vida</span>
+            <strong>{{system.health.value}} / {{system.health.max}}</strong>
+          </div>
+          <div class="kuro-health-bar"><span style="width: {{healthPercent}}%"></span></div>
+          <div class="kuro-health-controls">
+            <label>Vida Atual <input type="number" name="system.health.value" value="{{system.health.value}}"></label>
+            <label>Ferimentos Graves <input type="number" name="system.seriousWounds" value="{{system.seriousWounds}}" min="0"></label>
+          </div>
+          <div class="kuro-status-line"><span>Estado</span><strong class="state-{{healthState}}">{{healthStateLabel}}</strong></div>
+          <p class="kuro-rule-note">Cada Ferimento Grave remove 1D dos Testes de Ação.</p>
+        </section>
+      </div>
+
+      <section class="kuro-panel">
+        <h2>Características Secundárias</h2>
+        <div class="kuro-secondary-grid">
+          <div><span>VID</span><strong>{{system.health.max}}</strong><small>Vida</small></div>
+          <div><span>LD</span><strong>{{system.secondary.damageThreshold}}</strong><small>Limiar de Dano</small></div>
+          <div><span>LM</span><strong>{{system.secondary.deathThreshold}}</strong><small>Limiar de Morte</small></div>
+          <div><span>DEF</span><strong>{{system.secondary.defense}}</strong><small>Defesa</small></div>
+          <div><span>REA</span><strong>{{system.secondary.reaction}}</strong><small>Velocidade de Reação</small></div>
+          <div><span>#AC</span><strong>{{system.secondary.actions}}</strong><small>Ações</small></div>
+          <div><span>MOV</span><strong>{{system.secondary.movement}} m</strong><small>por ação</small></div>
+        </div>
+      </section>
+
+      <section class="kuro-panel kuro-quick-rules">
+        <h2>Motor de Testes — v0.1</h2>
+        <div class="kuro-rule-chips">
+          <span><strong>4</strong> vale 0</span>
+          <span><strong>6</strong> explode</span>
+          <span>Atributo = quantidade de D6</span>
+          <span>Perícia/Especialização = bônus</span>
+        </div>
+      </section>
+    </section>
+
+    <section data-kuro-panel="skills" hidden>
+      <div class="kuro-skills-grid">
+        {{#each skillGroups}}
+        <section class="kuro-panel kuro-skill-group">
+          <h2>{{this.label}}</h2>
+          {{#each this.skills}}
+          <div class="kuro-skill-row">
+            <button type="button" class="kuro-roll-button" data-roll-skill="{{this.key}}" title="Rolar {{this.label}}"><i class="fa-solid fa-dice-d6"></i></button>
+            <span class="kuro-skill-name">{{this.label}}</span>
+            <input type="number" name="system.skills.{{this.key}}" value="{{this.value}}" min="0" step="1">
+            <button type="button" class="kuro-icon-button" data-create-specialization="{{this.key}}" title="Adicionar Especialização"><i class="fa-solid fa-plus"></i></button>
+          </div>
+          {{#each this.specializations}}
+          <div class="kuro-specialization-row">
+            <button type="button" class="kuro-roll-button subtle" data-roll-specialization="{{this.id}}"><i class="fa-solid fa-dice-d6"></i></button>
+            <span>{{this.name}}</span>
+            <strong>{{this.level}}</strong>
+            {{#if this.gimmickCount}}<small>{{this.gimmickCount}} Gimmiku</small>{{/if}}
+            <button type="button" class="kuro-icon-button" data-edit-item="{{this.id}}"><i class="fa-solid fa-pen"></i></button>
+            <button type="button" class="kuro-icon-button danger" data-delete-item="{{this.id}}"><i class="fa-solid fa-trash"></i></button>
+          </div>
+          {{/each}}
+          {{/each}}
+        </section>
+        {{/each}}
+      </div>
+    </section>
+
+    <section data-kuro-panel="inventory" hidden>
+      <section class="kuro-panel">
+        <div class="kuro-panel-heading">
+          <h2>Equipamento</h2>
+          <button type="button" class="kuro-add-button" data-create-equipment><i class="fa-solid fa-plus"></i> Adicionar</button>
+        </div>
+        <div class="kuro-item-list">
+          {{#each equipment}}
+          <div class="kuro-item-row">
+            <img src="{{this.img}}" alt="">
+            <span>{{this.name}}</span>
+            <small>{{this.system.category}}</small>
+            <span>x{{this.system.quantity}}</span>
+            <button type="button" class="kuro-icon-button" data-edit-item="{{this.id}}"><i class="fa-solid fa-pen"></i></button>
+            <button type="button" class="kuro-icon-button danger" data-delete-item="{{this.id}}"><i class="fa-solid fa-trash"></i></button>
+          </div>
+          {{else}}
+          <p class="kuro-empty">Nenhum equipamento cadastrado.</p>
+          {{/each}}
+        </div>
+        <p class="kuro-rule-note">Armas, armaduras, munição, alcance e dano serão estruturados na etapa de combate/equipamentos.</p>
+      </section>
+    </section>
+
+    <section data-kuro-panel="notes" hidden>
+      <section class="kuro-panel kuro-notes-panel">
+        <h2>Notas</h2>
+        <textarea name="system.notes" rows="18" placeholder="Histórico, contatos, acontecimentos do Incidente Kuro, observações...">{{system.notes}}</textarea>
+      </section>
+    </section>
+  </main>
+
+  <footer class="kuro-footer">
+    <span>KURO RPG · Foundry VTT 12.343</span>
+    <span>System build 0.1.0</span>
+  </footer>
+</div>

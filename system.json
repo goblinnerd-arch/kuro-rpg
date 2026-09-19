@@ -1,0 +1,50 @@
+{
+  "id": "kuro",
+  "title": "KURO RPG",
+  "description": "Implementação independente do sistema KURO RPG para Foundry Virtual Tabletop. Build inicial em PT-BR para Foundry VTT 12.343.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "12.343",
+    "verified": "12.343",
+    "maximum": "12.343"
+  },
+  "authors": [
+    {
+      "name": "Projeto comunitário / uso privado"
+    }
+  ],
+  "esmodules": [
+    "kuro.mjs"
+  ],
+  "styles": [
+    "styles/kuro.css"
+  ],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {
+        "htmlFields": []
+      },
+      "npc": {
+        "htmlFields": []
+      }
+    },
+    "Item": {
+      "specialization": {},
+      "equipment": {}
+    }
+  },
+  "grid": {
+    "distance": 1,
+    "units": "m"
+  },
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "seriousWounds",
+  "socket": false
+}

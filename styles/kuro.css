@@ -1,0 +1,228 @@
+.kuro.sheet {
+  --kuro-bg: #11151a;
+  --kuro-panel: #edf0ef;
+  --kuro-panel-dark: #d7dcda;
+  --kuro-ink: #171b1e;
+  --kuro-muted: #687177;
+  --kuro-line: #2f3b42;
+  --kuro-accent: #2e5c66;
+  --kuro-danger: #7c2f35;
+  --kuro-success: #2e654e;
+  font-family: "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+}
+
+.kuro.sheet .window-content {
+  padding: 0;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.94), rgba(220,225,223,.97)),
+    repeating-linear-gradient(90deg, transparent 0 20px, rgba(0,0,0,.02) 21px);
+  color: var(--kuro-ink);
+}
+
+.kuro-sheet-shell,
+.kuro-item-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.kuro-header {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 18px;
+  padding: 18px 20px 14px;
+  background: linear-gradient(135deg, #101418, #20282d);
+  color: white;
+  border-bottom: 5px solid #42535b;
+}
+
+.kuro-portrait-block { display: flex; align-items: center; justify-content: center; }
+.kuro-portrait {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border: 2px solid #aeb9ba;
+  clip-path: polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%);
+  cursor: pointer;
+  background: #090b0d;
+}
+
+.kuro-title-row { display: flex; align-items: center; gap: 18px; }
+.kuro-name {
+  flex: 1;
+  border: 0;
+  border-bottom: 2px solid #7f9198;
+  background: transparent;
+  color: white;
+  font-size: 27px;
+  font-weight: 700;
+}
+.kuro-wordmark {
+  font-family: Impact, Haettenschweiler, sans-serif;
+  font-size: 46px;
+  letter-spacing: .08em;
+  line-height: 1;
+  color: #f2f2ef;
+  text-shadow: 4px 3px 0 #343b3e;
+  transform: skew(-4deg);
+}
+
+.kuro-identity-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px 12px;
+}
+.kuro-identity-grid label,
+.kuro-form-grid label,
+.kuro-gimmick-grid label,
+.kuro-health-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.kuro-header input {
+  color: white;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.22);
+}
+
+.kuro-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 0 20px;
+  background: #273239;
+}
+.kuro-tabs button {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  padding: 10px 18px;
+  background: transparent;
+  color: #dce2e1;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  cursor: pointer;
+}
+.kuro-tabs button.active { background: #edf0ef; color: #182025; }
+
+.kuro-content { flex: 1; overflow: auto; padding: 16px 20px 20px; }
+.kuro-summary-grid { display: grid; grid-template-columns: 1.35fr .85fr; gap: 14px; }
+.kuro-panel {
+  margin-bottom: 14px;
+  padding: 13px;
+  background: rgba(248,250,249,.92);
+  border: 1px solid #aab3b2;
+  box-shadow: 2px 3px 0 rgba(27,35,39,.16);
+}
+.kuro-panel h2 {
+  margin: -13px -13px 12px;
+  padding: 7px 12px;
+  background: linear-gradient(90deg, #27343b, #596970 65%, transparent);
+  color: white;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.kuro-panel h3 { margin: 0 0 6px; color: #56636a; text-transform: uppercase; font-size: 14px; }
+.kuro-attribute-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.kuro-attribute-row,
+.kuro-skill-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 52px 28px;
+  align-items: center;
+  min-height: 34px;
+  border-bottom: 1px solid #d3d8d7;
+}
+.kuro-attribute-row { grid-template-columns: 28px 1fr 52px; }
+.kuro-attribute-row .label small { color: var(--kuro-muted); margin-left: 4px; }
+.kuro-attribute-row input,
+.kuro-skill-row input { text-align: center; font-weight: 700; }
+
+.kuro-roll-button,
+.kuro-icon-button,
+.kuro-add-button {
+  border: 0;
+  background: transparent;
+  color: #34464e;
+  cursor: pointer;
+}
+.kuro-roll-button:hover,
+.kuro-icon-button:hover { color: #000; text-shadow: 0 0 8px rgba(46,92,102,.35); }
+.kuro-icon-button.danger { color: var(--kuro-danger); }
+.kuro-roll-button.subtle { opacity: .72; }
+
+.kuro-health-head,
+.kuro-status-line,
+.kuro-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.kuro-health-head strong { font-size: 21px; }
+.kuro-health-bar { height: 15px; background: #b4b9b8; overflow: hidden; margin: 7px 0 12px; }
+.kuro-health-bar span { display: block; height: 100%; background: #344e55; transition: width .2s ease; }
+.kuro-health-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.kuro-status-line { padding-top: 8px; border-top: 1px solid #c9cecd; }
+.state-dead, .state-coma { color: var(--kuro-danger); }
+.state-critical { color: #815b1d; }
+.state-stable { color: var(--kuro-success); }
+
+.kuro-secondary-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.kuro-secondary-grid > div { text-align: center; padding: 8px 4px; background: #e1e5e4; border-top: 3px solid #3f5057; }
+.kuro-secondary-grid span { display: block; color: #526169; font-weight: 700; }
+.kuro-secondary-grid strong { display: block; font-size: 21px; margin: 2px 0; }
+.kuro-secondary-grid small { font-size: 10px; color: #737d81; }
+
+.kuro-rule-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.kuro-rule-chips span { padding: 5px 9px; background: #dfe4e2; border-left: 3px solid #445a62; }
+.kuro-rule-note { margin: 9px 0 0; color: #687177; font-size: 11px; font-style: italic; }
+
+.kuro-skills-grid { columns: 2 390px; column-gap: 14px; }
+.kuro-skill-group { break-inside: avoid; }
+.kuro-skill-row { grid-template-columns: 28px 1fr 52px 28px; }
+.kuro-skill-name { font-weight: 600; }
+.kuro-specialization-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 36px auto 28px 28px;
+  gap: 4px;
+  align-items: center;
+  margin-left: 28px;
+  min-height: 28px;
+  color: #536167;
+  border-bottom: 1px dotted #c5cbca;
+}
+.kuro-specialization-row small { font-size: 10px; }
+
+.kuro-add-button { padding: 5px 9px; background: #33434a; color: white; }
+.kuro-item-list { display: grid; gap: 4px; }
+.kuro-item-row { display: grid; grid-template-columns: 34px 1fr 120px 50px 30px 30px; gap: 8px; align-items: center; padding: 5px; border-bottom: 1px solid #d1d6d5; }
+.kuro-item-row img { width: 32px; height: 32px; object-fit: cover; }
+.kuro-empty { color: #778186; text-align: center; padding: 22px; }
+.kuro-notes-panel textarea,
+.kuro-description-panel textarea { width: 100%; resize: vertical; min-height: 250px; }
+
+.kuro-footer { display: flex; justify-content: space-between; padding: 6px 20px; color: #aeb8ba; background: #161c20; font-size: 10px; letter-spacing: .05em; }
+
+.kuro-item-shell { padding: 14px; overflow: auto; }
+.kuro-item-header { display: grid; grid-template-columns: 74px 1fr; gap: 12px; align-items: center; margin-bottom: 14px; }
+.kuro-item-header img { width: 72px; height: 72px; object-fit: cover; cursor: pointer; border: 2px solid #3b4a50; }
+.kuro-item-name { width: 100%; font-size: 22px; font-weight: 700; border: 0; border-bottom: 2px solid #5c6b70; background: transparent; }
+.kuro-item-header small { color: #69757a; text-transform: uppercase; }
+.kuro-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.kuro-gimmick-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 12px; }
+
+.kuro-roll-dialog .form-group { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+.chat-message .kuro-roll-summary { padding: 7px 8px; border-left: 4px solid #485b62; background: rgba(44,58,64,.08); }
+.chat-message .kuro-roll-summary.success { border-left-color: #2e654e; }
+.chat-message .kuro-roll-summary.failure { border-left-color: #7c2f35; }
+.chat-message .kuro-roll-title { font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.chat-message .kuro-roll-meta, .chat-message .kuro-roll-rule { font-size: 11px; color: #657076; }
+.chat-message .kuro-roll-target, .chat-message .kuro-roll-margin { margin-top: 3px; font-weight: 700; }
+
+@media (max-width: 800px) {
+  .kuro-summary-grid { grid-template-columns: 1fr; }
+  .kuro-secondary-grid { grid-template-columns: repeat(4, 1fr); }
+  .kuro-identity-grid { grid-template-columns: repeat(2, 1fr); }
+}

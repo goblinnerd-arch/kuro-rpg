@@ -1,0 +1,56 @@
+<div class="kuro-item-shell">
+  <header class="kuro-item-header">
+    <img src="{{item.img}}" data-kuro-edit-image alt="{{item.name}}">
+    <div>
+      <input class="kuro-item-name" type="text" name="name" value="{{item.name}}">
+      <small>{{#if isSpecialization}}Especialização{{else}}Equipamento{{/if}}</small>
+    </div>
+  </header>
+
+  {{#if isSpecialization}}
+  <section class="kuro-panel">
+    <h2>Especialização</h2>
+    <div class="kuro-form-grid">
+      <label>Perícia
+        <select name="system.skill">
+          {{#each skillOptions}}
+          <option value="{{this.key}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+          {{/each}}
+        </select>
+      </label>
+      <label>Nível
+        <input type="number" name="system.level" value="{{system.level}}" min="0" step="1">
+      </label>
+    </div>
+  </section>
+
+  <section class="kuro-panel">
+    <h2>Gimmikus</h2>
+    <div class="kuro-gimmick-grid">
+      {{#each gimmicks}}
+      <label>{{this.label}}
+        <input type="number" name="system.gimmicks.{{this.key}}" value="{{this.value}}" min="0" step="1">
+      </label>
+      {{/each}}
+    </div>
+    <p class="kuro-rule-note">Os Gimmikus já são armazenados, mas sua automação integral entra na próxima etapa.</p>
+  </section>
+  {{/if}}
+
+  {{#if isEquipment}}
+  <section class="kuro-panel">
+    <h2>Equipamento</h2>
+    <div class="kuro-form-grid">
+      <label>Categoria <input type="text" name="system.category" value="{{system.category}}"></label>
+      <label>Quantidade <input type="number" name="system.quantity" value="{{system.quantity}}" min="0"></label>
+      <label>Kaiso <input type="number" name="system.kaiso" value="{{system.kaiso}}" min="0" max="6"></label>
+      <label>Preço (ienes) <input type="number" name="system.price" value="{{system.price}}" min="0"></label>
+    </div>
+  </section>
+  {{/if}}
+
+  <section class="kuro-panel kuro-description-panel">
+    <h2>Descrição</h2>
+    <textarea name="system.description" rows="12">{{system.description}}</textarea>
+  </section>
+</div>
